@@ -8,7 +8,7 @@ proxy-groups:
       - US AUTO
       - RU AUTO
   - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
-    name: AIGC
+    name: AI
     type: select
     proxies:
       - US AUTO
@@ -71,7 +71,7 @@ proxy-groups:
     exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
     proxies:
       - MANUAL
-      - AIGC
+      - AI
       - Microsoft
       - GitHub
       - Telegram
@@ -211,11 +211,11 @@ rules:
   - "RULE-SET,cn_ip,DIRECT_CN"
   - "RULE-SET,microsoft,Microsoft"
   - "RULE-SET,github,GitHub"
-  - "RULE-SET,bing,AIGC"
-  - "RULE-SET,copilot,AIGC"
-  - "RULE-SET,bard,AIGC"
-  - "RULE-SET,openai,AIGC"
-  - "RULE-SET,claude,AIGC"
+  - "RULE-SET,bing,AI"
+  - "RULE-SET,copilot,AI"
+  - "RULE-SET,bard,AI"
+  - "RULE-SET,openai,AI"
+  - "RULE-SET,claude,AI"
   - "RULE-SET,youtube,YouTube"
   - "RULE-SET,google_domain,Google"
   - "RULE-SET,google_ip,Google"
