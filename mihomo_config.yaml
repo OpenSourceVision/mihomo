@@ -17,7 +17,7 @@ proxy-groups:
     name: Microsoft
     type: select
     proxies:
-      - DIRECT_CN
+      - CN DIRECT
       - US AUTO
       - MANUAL
   - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/GitHub.png
@@ -61,7 +61,7 @@ proxy-groups:
     type: url-test
     interval: 300
   - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
-    name: DIRECT_CN
+    name: CN DIRECT
     type: select
     proxies:
       - DIRECT
@@ -79,7 +79,7 @@ proxy-groups:
       - Google
       - US AUTO
       - RU AUTO
-      - DIRECT_CN
+      - CN DIRECT
     name: GLOBAL
     type: select
 
@@ -207,8 +207,8 @@ rule-providers:
 
 rules:
   - "RULE-SET,private,DIRECT"
-  - "RULE-SET,cn_domain,DIRECT_CN"
-  - "RULE-SET,cn_ip,DIRECT_CN"
+  - "RULE-SET,cn_domain,CN DIRECT"
+  - "RULE-SET,cn_ip,CN DIRECT"
   - "RULE-SET,microsoft,Microsoft"
   - "RULE-SET,github,GitHub"
   - "RULE-SET,bing,AI"
