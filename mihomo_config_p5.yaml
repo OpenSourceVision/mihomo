@@ -127,7 +127,7 @@ proxy-groups:
       - MANUAL
 
   # 全球代理组
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Global.png
+  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
     include-all: true
     exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
     name: GLOBAL
@@ -148,7 +148,7 @@ proxy-groups:
       - CN DIRECT
 
   # 兜底组
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Others.png
+  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Lab.png
     name: FALLBACK
     type: select
     proxies:
