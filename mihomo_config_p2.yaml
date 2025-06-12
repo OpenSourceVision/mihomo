@@ -31,14 +31,13 @@ proxy-groups:
     interval: 300
     tolerance: 50
 
-  # 国外代理组
+  # 国外代理组（移除循环引用）
   - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
     name: 国外代理
     type: select
     proxies:
       - 美国自动
       - 俄罗斯自动
-      - 手动选择
 
   # 国内直连组
   - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
@@ -46,7 +45,6 @@ proxy-groups:
     type: select
     proxies:
       - DIRECT
-      - 手动选择
 
   # YouTube专用组（默认俄罗斯）
   - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
@@ -56,7 +54,24 @@ proxy-groups:
       - 俄罗斯自动
       - 美国自动
       - 国外代理
-      - 手动选择
+
+  # 流媒体专用组
+  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Streaming.png
+    name: 流媒体
+    type: select
+    proxies:
+      - 美国自动
+      - 俄罗斯自动
+      - 国外代理
+
+  # AI服务专用组
+  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Bot.png
+    name: AI服务
+    type: select
+    proxies:
+      - 美国自动
+      - 俄罗斯自动
+      - 国外代理
 
 rule-providers:
   # 基础规则
@@ -266,21 +281,21 @@ rules:
   - "RULE-SET,cn_domain,国内直连"
   - "RULE-SET,cn_ip,国内直连"
 
-  # YouTube专用规则（默认俄罗斯）
+  # 特殊服务优先规则（按重要性排序）
   - "RULE-SET,youtube,YouTube"
 
+  # AI服务（优先级较高）
+  - "RULE-SET,openai,AI服务"
+  - "RULE-SET,claude,AI服务"
+  - "RULE-SET,bing,AI服务"
+
   # 流媒体服务
-  - "RULE-SET,netflix,国外代理"
-  - "RULE-SET,disney,国外代理"
-  - "RULE-SET,spotify,国外代理"
-  - "RULE-SET,tiktok,国外代理"
+  - "RULE-SET,netflix,流媒体"
+  - "RULE-SET,disney,流媒体"
+  - "RULE-SET,spotify,流媒体"
+  - "RULE-SET,tiktok,流媒体"
 
-  # AI服务
-  - "RULE-SET,openai,国外代理"
-  - "RULE-SET,claude,国外代理"
-  - "RULE-SET,bing,国外代理"
-
-  # 科技公司
+  # 科技公司（Google规则放在YouTube后面，避免冲突）
   - "RULE-SET,microsoft,国外代理"
   - "RULE-SET,github,国外代理"
   - "RULE-SET,apple,国外代理"
