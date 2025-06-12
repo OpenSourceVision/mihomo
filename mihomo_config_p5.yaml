@@ -1,24 +1,30 @@
 proxy-groups:
-  # 手动选择组
+  # 手动选择组 (只包含节点)
   - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
     include-all: true
     exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
     name: MANUAL
     type: select
+
+  # 地区分组 (包含所有地区的分组)
+  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Area.png
+    name: REGION
+    type: select
     proxies:
-      - US AUTO
-      - UK AUTO
-      - FR AUTO
-      - RU AUTO
+      - US
+      - UK
+      - FR
+      - RU
 
   # AI 服务组
   - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
     name: AI
     type: select
     proxies:
-      - US AUTO
-      - UK AUTO
-      - FR AUTO
+      - REGION
+      - US
+      - UK
+      - FR
       - MANUAL
 
   # Microsoft 服务组
@@ -26,10 +32,11 @@ proxy-groups:
     name: Microsoft
     type: select
     proxies:
-      - CN DIRECT
-      - US AUTO
-      - UK AUTO
-      - FR AUTO
+      - CN
+      - REGION
+      - US
+      - UK
+      - FR
       - MANUAL
 
   # GitHub 服务组
@@ -37,9 +44,10 @@ proxy-groups:
     name: GitHub
     type: select
     proxies:
-      - US AUTO
-      - UK AUTO
-      - FR AUTO
+      - REGION
+      - US
+      - UK
+      - FR
       - MANUAL
 
   # Telegram 服务组
@@ -47,10 +55,11 @@ proxy-groups:
     name: Telegram
     type: select
     proxies:
-      - US AUTO
-      - UK AUTO
-      - FR AUTO
-      - RU AUTO
+      - REGION
+      - US
+      - UK
+      - FR
+      - RU
       - MANUAL
 
   # YouTube 服务组
@@ -58,10 +67,11 @@ proxy-groups:
     name: YouTube
     type: select
     proxies:
-      - RU AUTO
-      - US AUTO
-      - UK AUTO
-      - FR AUTO
+      - REGION
+      - RU
+      - US
+      - UK
+      - FR
       - MANUAL
 
   # Google 服务组
@@ -69,9 +79,10 @@ proxy-groups:
     name: Google
     type: select
     proxies:
-      - US AUTO
-      - UK AUTO
-      - FR AUTO
+      - REGION
+      - US
+      - UK
+      - FR
       - MANUAL
 
   # Cloudflare 服务组
@@ -79,10 +90,11 @@ proxy-groups:
     name: Cloudflare
     type: select
     proxies:
-      - US AUTO
-      - CN DIRECT
-      - UK AUTO
-      - FR AUTO
+      - REGION
+      - US
+      - CN
+      - UK
+      - FR
       - MANUAL
 
   # 地区自动选择组
@@ -90,7 +102,7 @@ proxy-groups:
     include-all: true
     exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
     filter: (?i)美国|USA|🇺🇸
-    name: US AUTO
+    name: US
     type: url-test
     interval: 300
 
@@ -98,7 +110,7 @@ proxy-groups:
     include-all: true
     exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
     filter: (?i)英国|UK|Britain|🇬🇧
-    name: UK AUTO
+    name: UK
     type: url-test
     interval: 300
 
@@ -106,7 +118,7 @@ proxy-groups:
     include-all: true
     exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
     filter: (?i)法国|France|FR|🇫🇷
-    name: FR AUTO
+    name: FR
     type: url-test
     interval: 300
 
@@ -114,13 +126,13 @@ proxy-groups:
     include-all: true
     exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
     filter: (?i)俄罗斯|Russia|RU|🇷🇺
-    name: RU AUTO
+    name: RU
     type: url-test
     interval: 300
 
   # 中国直连组
   - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
-    name: CN DIRECT
+    name: CN
     type: select
     proxies:
       - DIRECT
@@ -133,6 +145,7 @@ proxy-groups:
     name: GLOBAL
     type: select
     proxies:
+      - REGION
       - MANUAL
       - AI
       - Microsoft
@@ -141,18 +154,19 @@ proxy-groups:
       - YouTube
       - Google
       - Cloudflare
-      - US AUTO
-      - UK AUTO
-      - FR AUTO
-      - RU AUTO
-      - CN DIRECT
+      - US
+      - UK
+      - FR
+      - RU
+      - CN
 
   # 兜底组
   - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Lab.png
     name: FALLBACK
     type: select
     proxies:
-      - US AUTO
+      - REGION
+      - US
       - MANUAL
 
 rule-providers:
@@ -303,8 +317,8 @@ rules:
   - "RULE-SET,private,DIRECT"
   
   # 2. 中国境内服务直连
-  - "RULE-SET,cn_domain,CN DIRECT"
-  - "RULE-SET,cn_ip,CN DIRECT"
+  - "RULE-SET,cn_domain,CN"
+  - "RULE-SET,cn_ip,CN"
   
   # 3. AI 服务专用分流 (高优先级，避免被其他规则覆盖)
   - "RULE-SET,openai,AI"
@@ -325,8 +339,8 @@ rules:
   - "RULE-SET,telegram_domain,Telegram"
   - "RULE-SET,telegram_ip,Telegram"
   
-  # 6. 兜底规则 (非中国境内流量走全局代理)
-  - "RULE-SET,geolocation-!cn,GLOBAL"
+  # 6. 兜底规则 (非中国境内流量走地区分组)
+  - "RULE-SET,geolocation-!cn,REGION"
   
   # 7. 最终兜底 (理论上不会到达这里)
   - "MATCH,FALLBACK"
