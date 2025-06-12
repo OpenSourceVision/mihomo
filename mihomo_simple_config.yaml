@@ -6,26 +6,46 @@ proxy-groups:
     exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
     icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
 
-  # AI服务分组 - 包含所有节点
+  # 美国分组 - 自动测速
+  - name: US
+    type: url-test
+    include-all: true
+    filter: (?i)美国|美|US|USA|United States|America|San Francisco|Los Angeles|New York|Chicago|Miami|Dallas|Seattle|Phoenix|Denver|Atlanta
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
+
+  # 俄罗斯分组 - 自动测速
+  - name: RU
+    type: url-test
+    include-all: true
+    filter: (?i)俄罗斯|俄|RU|Russia|Moscow|Saint Petersburg|Novosibirsk|Yekaterinburg
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Russia.png
+
+  # AI服务分组 - 只包含手动选择和美国分组
   - name: AI
     type: select
-    include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
     proxies:
       - MANUAL
+      - US
     icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
 
-  # YouTube分组 - 包含所有节点
+  # YouTube分组 - 只包含美国和俄罗斯分组，默认俄罗斯
   - name: YouTube
     type: select
-    include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
     proxies:
-      - MANUAL
+      - RU
+      - US
     icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
 
-  # 国内直连分组
-  - name: DIRECT_CN
+  # 国内直连分组 - 改名为CN
+  - name: CN
     type: select
     proxies:
       - DIRECT
@@ -123,8 +143,8 @@ rules:
   - "RULE-SET,private,DIRECT"
   
   # 国内域名和IP直连
-  - "RULE-SET,cn_domain,DIRECT_CN"
-  - "RULE-SET,cn_ip,DIRECT_CN"
+  - "RULE-SET,cn_domain,CN"
+  - "RULE-SET,cn_ip,CN"
   
   # YouTube服务
   - "RULE-SET,youtube,YouTube"
