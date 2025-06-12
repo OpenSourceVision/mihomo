@@ -1,14 +1,14 @@
 proxy-groups:
-  # 手动节点分组 - 包含所有节点，不含地区分组
+  # 手动节点分组 - 包含所有节点，不含地区分组 (排序到第一)
   - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Static.png
     include-all: true
     exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
-    name: MANUAL_NODES
+    name: NODES
     type: select
   
   # 手动地区分组 - 包含所有地区分组，不含单个节点
   - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
-    name: MANUAL_REGIONS
+    name: REGIONS
     type: select
     proxies:
       - US
@@ -28,136 +28,159 @@ proxy-groups:
     name: AI
     type: select
     proxies:
-      - MANUAL_REGIONS
+      - REGIONS
       - US
-      - MANUAL_NODES
+      - NODES
   
   - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png
     name: Microsoft
     type: select
     proxies:
-      - DIRECT_CN
-      - MANUAL_REGIONS
+      - CN
+      - REGIONS
       - US
-      - MANUAL_NODES
+      - NODES
   
   - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/GitHub.png
     name: GitHub
     type: select
     proxies:
-      - MANUAL_REGIONS
+      - REGIONS
       - US
-      - MANUAL_NODES
+      - NODES
   
   - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png
     name: Apple
     type: select
     proxies:
-      - DIRECT_CN
-      - MANUAL_REGIONS
+      - CN
+      - REGIONS
       - US
-      - MANUAL_NODES
+      - NODES
   
   - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png
     name: Netflix
     type: select
     proxies:
-      - MANUAL_REGIONS
+      - REGIONS
       - SG
       - US
       - JP
       - HK
       - UK
-      - MANUAL_NODES
+      - NODES
   
   - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Disney+.png
     name: Disney
     type: select
     proxies:
-      - MANUAL_REGIONS
+      - REGIONS
       - SG
       - US
       - JP
       - HK
-      - MANUAL_NODES
+      - NODES
   
   - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
     name: Spotify
     type: select
     proxies:
-      - MANUAL_REGIONS
+      - REGIONS
       - US
-      - MANUAL_NODES
+      - NODES
   
   - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok.png
     name: TikTok
     type: select
     proxies:
-      - MANUAL_REGIONS
+      - REGIONS
       - SG
       - US
       - JP
       - KR
       - HK
       - TW
-      - MANUAL_NODES
+      - NODES
   
   - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram_X.png
     name: Telegram
     type: select
     proxies:
-      - MANUAL_REGIONS
+      - REGIONS
       - US
       - SG
       - HK
       - RU
-      - MANUAL_NODES
+      - NODES
   
   - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
     name: YouTube
     type: select
     proxies:
-      - MANUAL_REGIONS
+      - REGIONS
       - US
       - SG
       - JP
       - HK
       - RU
-      - MANUAL_NODES
+      - NODES
   
   - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
     name: Google
     type: select
     proxies:
-      - MANUAL_REGIONS
+      - REGIONS
       - US
       - SG
       - JP
       - HK
-      - MANUAL_NODES
+      - NODES
   
   - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Game.png
     name: Games
     type: select
     proxies:
-      - DIRECT_CN
-      - MANUAL_REGIONS
+      - CN
+      - REGIONS
       - US
       - SG
       - JP
       - HK
-      - MANUAL_NODES
+      - NODES
   
   - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Cloudflare.png
     name: Cloudflare
     type: select
     proxies:
-      - MANUAL_REGIONS
+      - REGIONS
       - US
       - SG
       - JP
       - HK
-      - MANUAL_NODES
+      - NODES
+  
+  # 社交媒体分组
+  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Twitter.png
+    name: Social
+    type: select
+    proxies:
+      - REGIONS
+      - US
+      - SG
+      - JP
+      - HK
+      - NODES
+  
+  # 金融支付分组
+  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/PayPal.png
+    name: Finance
+    type: select
+    proxies:
+      - REGIONS
+      - US
+      - SG
+      - HK
+      - NODES
   
   # 地区分组 - 自动测速
   - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
@@ -271,19 +294,19 @@ proxy-groups:
   
   # 国内直连分组
   - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
-    name: DIRECT_CN
+    name: CN
     type: select
     proxies:
       - DIRECT
-      - MANUAL_REGIONS
-      - MANUAL_NODES
+      - REGIONS
+      - NODES
   
   # 全局分组
   - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Global.png
     name: GLOBAL
     type: select
     proxies:
-      - MANUAL_REGIONS
+      - REGIONS
       - AI
       - Microsoft
       - GitHub
@@ -297,6 +320,8 @@ proxy-groups:
       - Google
       - Games
       - Cloudflare
+      - Social
+      - Finance
       - US
       - RU
       - UK
@@ -308,8 +333,8 @@ proxy-groups:
       - JP
       - KR
       - OTHER
-      - DIRECT_CN
-      - MANUAL_NODES
+      - CN
+      - NODES
 
 rule-providers:
   private:
@@ -527,8 +552,8 @@ rule-providers:
 rules:
   # 基础规则
   - "RULE-SET,private,DIRECT"
-  - "RULE-SET,cn_domain,DIRECT_CN"
-  - "RULE-SET,cn_ip,DIRECT_CN"
+  - "RULE-SET,cn_domain,CN"
+  - "RULE-SET,cn_ip,CN"
   # 流媒体服务 (优先级最高，避免被通用规则覆盖)
   - "RULE-SET,youtube,YouTube"
   - "RULE-SET,netflix,Netflix"
@@ -550,16 +575,16 @@ rules:
   # 社交通讯
   - "RULE-SET,telegram_domain,Telegram"
   - "RULE-SET,telegram_ip,Telegram"
-  - "RULE-SET,twitter,MANUAL_REGIONS"
-  - "RULE-SET,facebook,MANUAL_REGIONS"
+  - "RULE-SET,twitter,Social"
+  - "RULE-SET,facebook,Social"
   # 游戏平台
   - "RULE-SET,steam,Games"
   - "RULE-SET,epicgames,Games"
   - "RULE-SET,ubisoft,Games"
   - "RULE-SET,ea,Games"
   # 工具类
-  - "RULE-SET,paypal,MANUAL_REGIONS"
+  - "RULE-SET,paypal,Finance"
   - "RULE-SET,cloudflare,Cloudflare"
   # 兜底规则
-  - "RULE-SET,geolocation-!cn,MANUAL_REGIONS"
-  - "MATCH,MANUAL_REGIONS"
+  - "RULE-SET,geolocation-!cn,GLOBAL"
+  - "MATCH,GLOBAL"
