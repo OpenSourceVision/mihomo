@@ -1,4 +1,14 @@
 proxy-groups:
+  # 手动选择分组 - 包含地区分组和所有节点
+  - name: MANUAL
+    type: select
+    proxies:
+      - US
+      - RU
+    include-all: true
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
+
   # 美国分组 - 自动测速
   - name: US
     type: url-test
@@ -21,6 +31,13 @@ proxy-groups:
     tolerance: 50
     icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Russia.png
 
+  # 国内直连分组
+  - name: CN
+    type: select
+    proxies:
+      - DIRECT
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
+
   # AI服务分组 - 只包含手动选择和美国分组
   - name: AI
     type: select
@@ -36,23 +53,6 @@ proxy-groups:
       - RU
       - US
     icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
-
-  # 国内直连分组 - 改名为CN
-  - name: CN
-    type: select
-    proxies:
-      - DIRECT
-    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
-
-  # 手动选择分组 - 只包含地区分组，不包含规则分组
-  - name: MANUAL
-    type: select
-    proxies:
-      - US
-      - RU
-    include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
-    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
 
 rule-providers:
   # 私有网络
