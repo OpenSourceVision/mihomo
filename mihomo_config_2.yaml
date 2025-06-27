@@ -166,7 +166,7 @@ rules:
   - "RULE-SET,bing,AI"
   
   # 非中国地区域名走手动选择
-  - "RULE-SET,geolocation-!cn,MANUAL"
+  - "RULE-SET,geolocation-!cn,Select"
   
   # 兜底规则 - 其他所有流量走手动选择
-  - "MATCH,MANUAL"
+  - "MATCH,Select"
