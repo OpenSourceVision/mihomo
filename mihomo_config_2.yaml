@@ -3,8 +3,8 @@ proxy-groups:
   - name: Select
     type: select
     proxies:
-      - Node
       - US
+      - Node
       - RU
     icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
 
@@ -52,6 +52,25 @@ proxy-groups:
       - Select
     icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
 
+  # Google分组 - 默认美国
+  - name: Google
+    type: select
+    proxies:
+      - US
+      - RU
+      - Select
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google.png
+
+  # 微软分组 - 默认国内直连
+  - name: Microsoft
+    type: select
+    proxies:
+      - CN
+      - US
+      - RU
+      - Select
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png
+
   # YouTube分组 - 只包含美国和俄罗斯分组，默认俄罗斯
   - name: YouTube
     type: select
@@ -59,6 +78,15 @@ proxy-groups:
       - RU
       - US
     icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
+
+  # Telegram分组 - 默认美国
+  - name: Telegram
+    type: select
+    proxies:
+      - US
+      - RU
+      - Select
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
 
 rule-providers:
   # 私有网络
@@ -92,6 +120,33 @@ rule-providers:
   youtube:
     url: https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/YouTube/YouTube.yaml
     path: ./ruleset/youtube.yaml
+    behavior: classical
+    interval: 86400
+    format: yaml
+    type: http
+
+  # Telegram规则
+  telegram:
+    url: https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Telegram/Telegram.yaml
+    path: ./ruleset/telegram.yaml
+    behavior: classical
+    interval: 86400
+    format: yaml
+    type: http
+
+  # Google规则
+  google:
+    url: https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Google//Google_Search.yaml
+    path: ./ruleset/google.yaml
+    behavior: classical
+    interval: 86400
+    format: yaml
+    type: http
+
+  # 微软规则 - 国内服务
+  microsoft_cn:
+    url: https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Microsoft/Microsoft.yaml
+    path: ./ruleset/microsoft_cn.yaml
     behavior: classical
     interval: 86400
     format: yaml
@@ -148,6 +203,14 @@ rule-providers:
     type: http
 
 rules:
+
+  # AI服务
+  - "RULE-SET,openai,AI"
+  - "RULE-SET,claude,AI"
+  - "RULE-SET,bard,AI"
+  - "RULE-SET,copilot,AI"
+  - "RULE-SET,bing,AI"
+  
   # 私有网络直连
   - "RULE-SET,private,DIRECT"
   
@@ -158,12 +221,14 @@ rules:
   # YouTube服务
   - "RULE-SET,youtube,YouTube"
   
-  # AI服务
-  - "RULE-SET,openai,AI"
-  - "RULE-SET,claude,AI"
-  - "RULE-SET,bard,AI"
-  - "RULE-SET,copilot,AI"
-  - "RULE-SET,bing,AI"
+  # Telegram服务
+  - "RULE-SET,telegram,Telegram"
+  
+  # Google服务
+  - "RULE-SET,google,Google"
+  
+  # 微软服务 - 默认国内直连
+  - "RULE-SET,microsoft_cn,Microsoft"
   
   # 非中国地区域名走手动选择
   - "RULE-SET,geolocation-!cn,Select"
