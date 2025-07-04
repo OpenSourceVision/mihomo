@@ -59,7 +59,7 @@ proxy-groups:
       - US
       - RU
       - Select
-    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google.png
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
 
   # 微软分组 - 默认国内直连
   - name: Microsoft
