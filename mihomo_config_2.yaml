@@ -1,21 +1,20 @@
-# DNS 配置
+```yaml
 dns:
   enable: true
   listen: 0.0.0.0:1053
   ipv6: false
   respect-rules: true
   enhanced-mode: fake-ip
-  fake-ip-range: 28.0.0.1/8
+  fake-ip-range: 198.18.0.0/15
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
-    - "rule-set:private,cn_domain"
-    - "+.msftconnecttest.com"
-    - "+.msftncsi.com"
+    - "*.msftconnecttest.com"
+    - "*.msftncsi.com"
     - "time.*.com"
   default-nameserver:
     - 223.5.5.5
   proxy-server-nameserver:
-    - https://223.5.5.5/dns-query
+    - https://dns.alidns.com/dns-query
   nameserver:
     - 223.5.5.5
     - 119.29.29.29
@@ -34,7 +33,8 @@ proxy-groups:
   - name: Node
     type: select
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    filter: (?i)节点|服务器
+    exclude-filter: GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
     icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Server.png
 
   # 美国分组 - 自动测速
@@ -42,8 +42,8 @@ proxy-groups:
     type: url-test
     include-all: true
     filter: (?i)美国|美|US|USA|United States|America|San Francisco|Los Angeles|New York|Chicago|Miami|Dallas|Seattle|Phoenix|Denver|Atlanta
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
-    url: http://www.gstatic.com/generate_204
+    exclude-filter: GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    url: http://detectportal.firefox.com/success.txt
     interval: 300
     tolerance: 50
     icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
@@ -53,8 +53,8 @@ proxy-groups:
     type: url-test
     include-all: true
     filter: (?i)俄罗斯|俄|RU|Russia|Moscow|Saint Petersburg|Novosibirsk|Yekaterinburg
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
-    url: http://www.gstatic.com/generate_204
+    exclude-filter: GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    url: http://detectportal.firefox.com/success.txt
     interval: 300
     tolerance: 50
     icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Russia.png
@@ -113,7 +113,7 @@ proxy-groups:
 rule-providers:
   # 私有网络
   private:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/private.yaml
+    url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/private.yaml
     path: ./ruleset/private.yaml
     behavior: domain
     interval: 86400
@@ -122,7 +122,7 @@ rule-providers:
 
   # 私有网络域名（用于DNS过滤）
   private_domain:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/private.yaml
+    url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/private.yaml
     path: ./ruleset/private_domain.yaml
     behavior: domain
     interval: 86400
@@ -131,7 +131,7 @@ rule-providers:
 
   # 国内域名
   cn_domain:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/cn.yaml
+    url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/cn.yaml
     path: ./ruleset/cn_domain.yaml
     behavior: domain
     interval: 86400
@@ -140,7 +140,7 @@ rule-providers:
 
   # 国内IP
   cn_ip:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/cn.yaml
+    url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/cn.yaml
     path: ./ruleset/cn_ip.yaml
     behavior: ipcidr
     interval: 86400
@@ -149,7 +149,7 @@ rule-providers:
 
   # YouTube规则
   youtube:
-    url: https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/YouTube/YouTube.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/YouTube/YouTube.yaml
     path: ./ruleset/youtube.yaml
     behavior: classical
     interval: 86400
@@ -158,7 +158,7 @@ rule-providers:
 
   # Telegram规则
   telegram:
-    url: https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Telegram/Telegram.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Telegram/Telegram.yaml
     path: ./ruleset/telegram.yaml
     behavior: classical
     interval: 86400
@@ -167,7 +167,7 @@ rule-providers:
 
   # Google规则
   google:
-    url: https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Google/Google.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Google/Google.yaml
     path: ./ruleset/google.yaml
     behavior: classical
     interval: 86400
@@ -176,7 +176,7 @@ rule-providers:
 
   # 微软规则 - 国内服务
   microsoft_cn:
-    url: https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Microsoft/Microsoft.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Microsoft/Microsoft.yaml
     path: ./ruleset/microsoft_cn.yaml
     behavior: classical
     interval: 86400
@@ -185,7 +185,7 @@ rule-providers:
 
   # AI服务规则
   openai:
-    url: https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml
     path: ./ruleset/openai.yaml
     behavior: classical
     interval: 86400
@@ -193,7 +193,7 @@ rule-providers:
     type: http
 
   claude:
-    url: https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Claude/Claude.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Claude/Claude.yaml
     path: ./ruleset/claude.yaml
     behavior: classical
     interval: 86400
@@ -201,7 +201,7 @@ rule-providers:
     type: http
 
   bard:
-    url: https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/BardAI/BardAI.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/BardAI/BardAI.yaml
     path: ./ruleset/bard.yaml
     behavior: classical
     interval: 86400
@@ -209,7 +209,7 @@ rule-providers:
     type: http
 
   copilot:
-    url: https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Copilot/Copilot.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7 ios_rule_script@master/rule/Clash/Copilot/Copilot.yaml
     path: ./ruleset/copilot.yaml
     behavior: classical
     interval: 86400
@@ -217,7 +217,7 @@ rule-providers:
     type: http
 
   bing:
-    url: https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Bing/Bing.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Bing/Bing.yaml
     path: ./ruleset/bing.yaml
     behavior: classical
     interval: 86400
@@ -226,7 +226,7 @@ rule-providers:
 
   # 非中国地区域名
   geolocation-!cn:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/geolocation-!cn.yaml
+    url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/geolocation-!cn.yaml
     path: ./ruleset/geolocation-!cn.yaml
     behavior: domain
     interval: 86400
@@ -235,33 +235,34 @@ rule-providers:
 
 rules:
   # AI服务
-  - "RULE-SET,openai,AI"
-  - "RULE-SET,claude,AI"
-  - "RULE-SET,bard,AI"
-  - "RULE-SET,copilot,AI"
-  - "RULE-SET,bing,AI"
+  - RULE-SET,openai,AI
+  - RULE-SET,claude,AI
+  - RULE-SET,bard,AI
+  - RULE-SET,copilot,AI
+  - RULE-SET,bing,AI
   
   # 私有网络直连
-  - "RULE-SET,private,DIRECT"
+  - RULE-SET,private,DIRECT
   
   # 国内域名和IP直连
-  - "RULE-SET,cn_domain,CN"
-  - "RULE-SET,cn_ip,CN"
+  - RULE-SET,cn_domain,CN
+  - RULE-SET,cn_ip,CN
   
   # YouTube服务
-  - "RULE-SET,youtube,YouTube"
+  - RULE-SET,youtube,YouTube
   
   # Telegram服务
-  - "RULE-SET,telegram,Telegram"
+  - RULE-SET,telegram,Telegram
   
   # Google服务
-  - "RULE-SET,google,Google"
+  - RULE-SET,google,Google
   
   # 微软服务 - 默认国内直连
-  - "RULE-SET,microsoft_cn,Microsoft"
+  - RULE-SET,microsoft_cn,Microsoft
   
   # 非中国地区域名走手动选择
-  - "RULE-SET,geolocation-!cn,Select"
+  - RULE-SET,geolocation-!cn,Select
   
-  # 兜底规则 - 其他所有流量走手动选择
-  - "MATCH,Select"
+  # 兜底规则 - 其他所有流量直连
+  - MATCH,DIRECT
+```
