@@ -1,4 +1,3 @@
-
 # 全局网络配置
 port: 7890
 socks-port: 7891
@@ -52,7 +51,7 @@ dns:
   fake-ip-range: 28.0.0.1/8
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
-    - "rule-set:private_domain,cn_domain"
+    - "rule-set:private,cn_domain"
     - "+.msftconnecttest.com"
     - "+.msftncsi.com"
     - "time.*.com"
@@ -164,6 +163,15 @@ rule-providers:
     format: yaml
     type: http
 
+  # 私有网络域名（用于DNS过滤）
+  private_domain:
+    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/private.yaml
+    path: ./ruleset/private_domain.yaml
+    behavior: domain
+    interval: 86400
+    format: yaml
+    type: http
+
   # 国内域名
   cn_domain:
     url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/cn.yaml
@@ -269,7 +277,6 @@ rule-providers:
     type: http
 
 rules:
-
   # AI服务
   - "RULE-SET,openai,AI"
   - "RULE-SET,claude,AI"
