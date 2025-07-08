@@ -60,8 +60,8 @@ proxy-groups:
   - name: AI
     type: select
     proxies:
-      - HK
       - US
+      - HK
       - Select
     icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
 
@@ -69,8 +69,8 @@ proxy-groups:
   - name: Google
     type: select
     proxies:
-      - HK
       - US
+      - HK
       - RU
       - Select
     icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
@@ -90,8 +90,8 @@ proxy-groups:
   - name: YouTube
     type: select
     proxies:
-      - HK
       - RU
+      - HK
       - US
     icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
 
@@ -99,8 +99,8 @@ proxy-groups:
   - name: Telegram
     type: select
     proxies:
-      - HK
       - US
+      - HK
       - RU
       - Select
     icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
