@@ -1,24 +1,4 @@
 
-dns:
-  enable: true
-  listen: 0.0.0.0:1053
-  ipv6: false
-  respect-rules: true
-  enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.0/15
-  fake-ip-filter-mode: blacklist
-  fake-ip-filter:
-    - "*.msftconnecttest.com"
-    - "*.msftncsi.com"
-    - "time.*.com"
-  default-nameserver:
-    - 223.5.5.5
-  proxy-server-nameserver:
-    - https://dns.alidns.com/dns-query
-  nameserver:
-    - 223.5.5.5
-    - 119.29.29.29
-
 proxy-groups:
   # 手动选择分组 - 只包含地区分组和Node分组
   - name: Select
