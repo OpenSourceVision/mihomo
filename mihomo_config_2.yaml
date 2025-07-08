@@ -154,4 +154,4 @@ rules:
   - RULE-SET,geolocation-!cn,Select
   
   # 兜底规则 - 其他所有流量直连
-  - MATCH,DIRECT
+  - MATCH,Select
