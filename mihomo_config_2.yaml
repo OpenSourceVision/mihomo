@@ -45,6 +45,14 @@ proxy-groups:
       - US
     icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
 
+  # GitHub分组 - 包含美国和手动选择分组
+  - name: GitHub
+    type: select
+    proxies:
+      - US
+      - Select
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/GitHub.png
+
 rule-providers:
   # 私有网络
   private:
@@ -123,6 +131,15 @@ rule-providers:
     format: yaml
     type: http
 
+  # GitHub规则
+  github:
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GitHub/GitHub.yaml
+    path: ./ruleset/github.yaml
+    behavior: classical
+    interval: 86400
+    format: yaml
+    type: http
+
   # 非中国地区域名
   geolocation-!cn:
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/geolocation-!cn.yaml
@@ -149,6 +166,9 @@ rules:
   
   # YouTube服务
   - RULE-SET,youtube,YouTube
+  
+  # GitHub服务
+  - RULE-SET,github,GitHub
   
   # 非中国地区域名走手动选择
   - RULE-SET,geolocation-!cn,Select
