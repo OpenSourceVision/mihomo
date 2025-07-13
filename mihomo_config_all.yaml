@@ -1,72 +1,67 @@
+# ======================================
+# 代理分组配置
+# ======================================
 proxy-groups:
-  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
+  # ====== 手动选择分组 ======
+  - name: MANUAL
+    type: select
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
+    proxies:
+      - US AUTO
+      - JP AUTO
+      - SG AUTO
+      - KR AUTO
+      - TW AUTO
+      - HK AUTO
+      - RU AUTO
+      - Node
+  # ====== 节点选择分组 ======
+  - name: Node
+    type: select
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Server.png
     include-all: true
     exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
-    name: MANUAL
+
+  # ====== AI 服务分组 ======
+  - name: AI
     type: select
-    proxies:
-      - US AUTO
-      - JP AUTO
-      - SG AUTO
-      - KR AUTO
-      - TW AUTO
-      - HK AUTO
-      - RU AUTO
-  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
-    name: AI
-    type: select
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
     proxies:
       - US AUTO
       - MANUAL
-  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png
-    name: Microsoft
+  # ====== 科技公司服务分组 ======
+  - name: Microsoft
     type: select
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png
     proxies:
       - DIRECT_CN
+      - HK AUTO
+      - SG AUTO
       - US AUTO
       - MANUAL
-  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/GitHub.png
-    name: GitHub
+
+  - name: GitHub
     type: select
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/GitHub.png
     proxies:
+      - SG AUTO
+      - HK AUTO
       - US AUTO
       - MANUAL
-  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png
-    name: Apple
+
+  - name: Apple
     type: select
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png
     proxies:
       - DIRECT_CN
-      - US AUTO
-      - MANUAL
-  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png
-    name: Netflix
-    type: select
-    proxies:
-      - SG AUTO
-      - US AUTO
-      - JP AUTO
-      - KR AUTO
-      - TW AUTO
       - HK AUTO
-      - MANUAL
-  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Disney+.png
-    name: Disney
-    type: select
-    proxies:
-      - SG AUTO
-      - US AUTO
       - JP AUTO
-      - HK AUTO
-      - MANUAL
-  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
-    name: Spotify
-    type: select
-    proxies:
       - US AUTO
       - MANUAL
-  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok.png
-    name: TikTok
+  # ====== 流媒体服务分组 ======
+  - name: Netflix
     type: select
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png
     proxies:
       - SG AUTO
       - US AUTO
@@ -75,18 +70,49 @@ proxy-groups:
       - TW AUTO
       - HK AUTO
       - MANUAL
-  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram_X.png
-    name: Telegram
+
+  - name: Disney
     type: select
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Disney+.png
+    proxies:
+      - SG AUTO
+      - US AUTO
+      - JP AUTO
+      - HK AUTO
+      - MANUAL
+
+  - name: Spotify
+    type: select
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
+    proxies:
+      - US AUTO
+      - MANUAL
+  - name: TikTok
+    type: select
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok.png
+    proxies:
+      - SG AUTO
+      - US AUTO
+      - JP AUTO
+      - KR AUTO
+      - TW AUTO
+      - HK AUTO
+      - MANUAL
+
+  # ====== 社交通讯服务分组 ======
+  - name: Telegram
+    type: select
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram_X.png
     proxies:
       - US AUTO
       - SG AUTO
       - HK AUTO
       - RU AUTO
       - MANUAL
-  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
-    name: YouTube
+
+  - name: YouTube
     type: select
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
     proxies:
       - US AUTO
       - SG AUTO
@@ -94,95 +120,123 @@ proxy-groups:
       - HK AUTO
       - RU AUTO
       - MANUAL
-  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
-    name: Google
+
+  - name: Google
     type: select
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
     proxies:
       - US AUTO
       - SG AUTO
       - JP AUTO
       - HK AUTO
       - MANUAL
-  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Game.png
-    name: Games
+  # ====== 游戏服务分组 ======
+  - name: Games
     type: select
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Game.png
     proxies:
       - DIRECT_CN
+      - KR AUTO
+      - JP AUTO
+      - SG AUTO
+      - HK AUTO
+      - US AUTO
+      - MANUAL
+
+  # ====== 金融服务分组 ======
+  - name: Finance
+    type: select
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/PayPal.png
+    proxies:
       - US AUTO
       - SG AUTO
-      - JP AUTO
       - HK AUTO
       - MANUAL
-  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Cloudflare.png
-    name: Cloudflare
+
+  # ====== 其他服务分组 ======
+  - name: Cloudflare
     type: select
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Cloudflare.png
     proxies:
       - US AUTO
       - SG AUTO
       - JP AUTO
       - HK AUTO
       - MANUAL
-  # 地区分组
-  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
+  # ====== 地区自动选择分组 ======
+  - name: US AUTO
+    type: url-test
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
     include-all: true
     exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
     filter: (?i)美国|USA|United States|US|🇺🇸
-    name: US AUTO
-    type: url-test
     interval: 300
-  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
+  
+  - name: JP AUTO
+    type: url-test
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
     include-all: true
     exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
     filter: (?i)日本|Japan|JP|🇯🇵
-    name: JP AUTO
-    type: url-test
     interval: 300
-  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
+
+  - name: SG AUTO
+    type: url-test
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
     include-all: true
     exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
     filter: (?i)新加坡|Singapore|SG|🇸🇬
-    name: SG AUTO
-    type: url-test
     interval: 300
-  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Korea.png
+
+  - name: KR AUTO
+    type: url-test
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Korea.png
     include-all: true
     exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
     filter: (?i)韩国|Korea|KR|🇰🇷
-    name: KR AUTO
-    type: url-test
     interval: 300
-  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Taiwan.png
+
+  - name: TW AUTO
+    type: url-test
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Taiwan.png
     include-all: true
     exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
     filter: (?i)台湾|Taiwan|TW|🇹🇼
-    name: TW AUTO
-    type: url-test
     interval: 300
-  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
+
+  - name: HK AUTO
+    type: url-test
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
     include-all: true
     exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
     filter: (?i)香港|Hong Kong|HK|🇭🇰
-    name: HK AUTO
-    type: url-test
     interval: 300
-  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Russia.png
+
+  - name: RU AUTO
+    type: url-test
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Russia.png
     include-all: true
     exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
     filter: (?i)俄罗斯|Russia|RU|🇷🇺
-    name: RU AUTO
-    type: url-test
     interval: 300
-  - icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
-    name: DIRECT_CN
+  
+  # ====== 直连分组 ======
+  - name: DIRECT_CN
     type: select
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
     proxies:
       - DIRECT
       - MANUAL
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Global.png
+
+  # ====== 全局分组 ======
+  - name: GLOBAL
+    type: select
+    icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Global.png
     include-all: true
     exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
     proxies:
       - MANUAL
+      - Node
       - AI
       - Microsoft
       - GitHub
@@ -195,6 +249,7 @@ proxy-groups:
       - YouTube
       - Google
       - Games
+      - Finance
       - Cloudflare
       - US AUTO
       - JP AUTO
@@ -204,10 +259,10 @@ proxy-groups:
       - HK AUTO
       - RU AUTO
       - DIRECT_CN
-    name: GLOBAL
-    type: select
 
-    
+# ======================================
+# 规则提供者配置
+# ======================================
 rule-providers:
   private:
     url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/private.yaml
@@ -422,41 +477,51 @@ rule-providers:
     type: http
 
 rules:
-  # 基础规则
+  # 基础规则 (最高优先级)
   - "RULE-SET,private,DIRECT"
   - "RULE-SET,cn_domain,DIRECT_CN"
   - "RULE-SET,cn_ip,DIRECT_CN"
-  # 流媒体服务 (优先级最高，避免被通用规则覆盖)
+  
+  # AI服务 (在对应公司规则之前，避免被覆盖)
+  - "RULE-SET,openai,AI"
+  - "RULE-SET,claude,AI"
+  - "RULE-SET,copilot,AI"
+  - "RULE-SET,bing,AI"
+  - "RULE-SET,bard,AI"
+  
+  # 流媒体服务 (高优先级，避免被通用规则覆盖)
   - "RULE-SET,youtube,YouTube"
   - "RULE-SET,netflix,Netflix"
   - "RULE-SET,disney,Disney"
   - "RULE-SET,spotify,Spotify"
   - "RULE-SET,tiktok,TikTok"
-  # 特定AI服务 (在通用服务之前)
-  - "RULE-SET,copilot,AI"
-  - "RULE-SET,bing,AI"
-  - "RULE-SET,bard,AI"
-  - "RULE-SET,openai,AI"
-  - "RULE-SET,claude,AI"
-  # 科技公司 (通用规则)
+  
+  # 科技公司 (通用规则，在AI服务之后)
   - "RULE-SET,microsoft,Microsoft"
   - "RULE-SET,github,GitHub"
   - "RULE-SET,apple,Apple"
   - "RULE-SET,google_domain,Google"
   - "RULE-SET,google_ip,Google"
+  
   # 社交通讯
   - "RULE-SET,telegram_domain,Telegram"
   - "RULE-SET,telegram_ip,Telegram"
-  - "RULE-SET,twitter,MANUAL"
-  - "RULE-SET,facebook,MANUAL"
+  - "RULE-SET,twitter,Telegram"
+  - "RULE-SET,facebook,Telegram"
+  
   # 游戏平台
   - "RULE-SET,steam,Games"
   - "RULE-SET,epicgames,Games"
   - "RULE-SET,ubisoft,Games"
   - "RULE-SET,ea,Games"
+  
+  # 金融服务
+  - "RULE-SET,paypal,Finance"
+  
   # 工具类
-  - "RULE-SET,paypal,MANUAL"
   - "RULE-SET,cloudflare,Cloudflare"
+  
   # 兜底规则
   - "RULE-SET,geolocation-!cn,MANUAL"
+  - "GEOIP,CN,DIRECT_CN"
   - "MATCH,MANUAL"
