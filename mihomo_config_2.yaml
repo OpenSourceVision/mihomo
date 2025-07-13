@@ -15,7 +15,7 @@ proxy-groups:
     exclude-filter: GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
     url: http://detectportal.firefox.com/success.txt
     interval: 300
-    tolerance: 50
+    tolerance: 200
     icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
 
   # 俄罗斯分组 - 自动测速
@@ -26,7 +26,7 @@ proxy-groups:
     exclude-filter: GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
     url: http://detectportal.firefox.com/success.txt
     interval: 300
-    tolerance: 50
+    tolerance: 200
     icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Russia.png
 
   # AI服务分组 - 包含手动选择和美国分组
