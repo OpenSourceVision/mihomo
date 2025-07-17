@@ -63,7 +63,7 @@ proxy-groups:
       - US
       - HK
       - Select
-    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/claude.png
 
   # Google分组 - 默认香港
   - name: Google
