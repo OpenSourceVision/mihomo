@@ -35,8 +35,7 @@ proxy-groups:
     proxies:
       - US
       - Select
-    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
-
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/claude.png
   # YouTube分组 - 包含美国和俄罗斯分组，默认俄罗斯
   - name: YouTube
     type: select
