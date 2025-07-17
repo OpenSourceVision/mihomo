@@ -25,7 +25,7 @@ proxy-groups:
   # ====== AI 服务分组 ======
   - name: AI
     type: select
-    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/claude.png
     proxies:
       - US AUTO
       - MANUAL
