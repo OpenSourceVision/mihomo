@@ -38,7 +38,7 @@ dns:
 proxy-groups:
   # 手动选择组
   - name: "手动选择"
-   type: select
+    type: select
     icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Server.png
     include-all: true
     exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
