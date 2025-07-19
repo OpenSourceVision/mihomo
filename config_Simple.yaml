@@ -20,28 +20,29 @@ dns:
   enable: true
   listen: 0.0.0.0:53
   default-nameserver:
-    - 223.5.5.5
-    - 119.29.29.29
+    - 223.5.5.5  # 阿里 DNS
+    - 8.8.8.8    # 谷歌 DNS
   nameserver:
-    - https://doh.pub/dns-query
-    - https://dns.alidns.com/dns-query
+    - https://dns.alidns.com/dns-query  # 阿里 DoH
+    - https://dns.google/dns-query      # 谷歌 DoH
   fallback:
-    - https://1.1.1.1/dns-query
-    - https://dns.google/dns-query
+    - https://dns.google/dns-query      # 谷歌 DoH
+    - https://dns.alidns.com/dns-query  # 阿里 DoH
   fallback-filter:
     geoip: true
     geoip-code: CN
     ipcidr:
       - 240.0.0.0/4
 
-# 代理组配置
+
 proxy-groups:
   # 手动选择组
   - name: "手动选择"
-    type: select
+   type: select
     icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Server.png
     include-all: true
     exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+
   
   # 国内直连组
   - name: "国内直连"
@@ -59,104 +60,11 @@ rule-providers:
     path: ./ruleset/private.yaml
     interval: 86400
 
-  apple:
-    type: http
-    behavior: domain
-    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.yaml"
-    path: ./ruleset/apple.yaml
-    interval: 86400
-
-  microsoft:
-    type: http
-    behavior: domain
-    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.yaml"
-    path: ./ruleset/microsoft.yaml
-    interval: 86400
-
-  google:
-    type: http
-    behavior: domain
-    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.yaml"
-    path: ./ruleset/google.yaml
-    interval: 86400
-
-  telegram:
-    type: http
-    behavior: domain
-    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.yaml"
-    path: ./ruleset/telegram.yaml
-    interval: 86400
-
-  twitter:
-    type: http
-    behavior: domain
-    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.yaml"
-    path: ./ruleset/twitter.yaml
-    interval: 86400
-
-  facebook:
-    type: http
-    behavior: domain
-    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/facebook.yaml"
-    path: ./ruleset/facebook.yaml
-    interval: 86400
-
-  openai:
-    type: http
-    behavior: domain
-    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/openai.yaml"
-    path: ./ruleset/openai.yaml
-    interval: 86400
-
-
-
-  claude:
-    type: http
-    behavior: domain
-    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/anthropic.yaml"
-    path: ./ruleset/claude.yaml
-    interval: 86400
-
-  bing:
-    type: http
-    behavior: domain
-    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bing.yaml"
-    path: ./ruleset/bing.yaml
-    interval: 86400
-
-  youtube:
-    type: http
-    behavior: domain
-    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.yaml"
-    path: ./ruleset/youtube.yaml
-    interval: 86400
-
-  netflix:
-    type: http
-    behavior: domain
-    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.yaml"
-    path: ./ruleset/netflix.yaml
-    interval: 86400
-
-  geolocation-!cn:
-    type: http
-    behavior: domain
-    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.yaml"
-    path: ./ruleset/geolocation-!cn.yaml
-    interval: 86400
-
   cn:
     type: http
     behavior: domain
     url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.yaml"
     path: ./ruleset/cn.yaml
-    interval: 86400
-
-  telegramcidr:
-    type: http
-    behavior: ipcidr
-    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.yaml"
-    path: ./ruleset/telegramcidr.yaml
     interval: 86400
 
   cncidr:
@@ -179,32 +87,15 @@ rules:
   - DOMAIN,clash.razord.top,国内直连
   - DOMAIN,yacd.haishan.me,国内直连
   
-  # 私有网络直连
+  # 私有网络直连（最高优先级）
   - RULE-SET,private,国内直连
   - RULE-SET,lancidr,国内直连
   - GEOIP,LAN,国内直连
   
   # 国内服务直连
-  - RULE-SET,apple,国内直连
-  - RULE-SET,microsoft,国内直连
   - RULE-SET,cn,国内直连
   - RULE-SET,cncidr,国内直连
   - GEOIP,CN,国内直连
   
-  # 国外服务代理
-  - RULE-SET,google,手动选择
-  - RULE-SET,telegram,手动选择
-  - RULE-SET,telegramcidr,手动选择
-  - RULE-SET,twitter,手动选择
-  - RULE-SET,facebook,手动选择
-  - RULE-SET,youtube,手动选择
-  - RULE-SET,netflix,手动选择
-  
-  # AI服务代理
-  - RULE-SET,openai,手动选择
-  - RULE-SET,claude,手动选择
-  - RULE-SET,bing,手动选择
-  - RULE-SET,geolocation-!cn,手动选择
-  
-  # 兜底规则
+  # 兜底规则（除了直连的全部走代理）
   - MATCH,手动选择
