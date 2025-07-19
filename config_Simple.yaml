@@ -55,106 +55,122 @@ rule-providers:
   private:
     type: http
     behavior: domain
-    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"
-    path: ./ruleset/private.mrs
+    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.yaml"
+    path: ./ruleset/private.yaml
     interval: 86400
 
   apple:
     type: http
     behavior: domain
-    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs"
-    path: ./ruleset/apple.mrs
+    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.yaml"
+    path: ./ruleset/apple.yaml
     interval: 86400
 
   microsoft:
     type: http
     behavior: domain
-    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs"
-    path: ./ruleset/microsoft.mrs
+    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.yaml"
+    path: ./ruleset/microsoft.yaml
     interval: 86400
 
   google:
     type: http
     behavior: domain
-    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"
-    path: ./ruleset/google.mrs
+    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.yaml"
+    path: ./ruleset/google.yaml
     interval: 86400
 
   telegram:
     type: http
     behavior: domain
-    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs"
-    path: ./ruleset/telegram.mrs
+    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.yaml"
+    path: ./ruleset/telegram.yaml
     interval: 86400
 
   twitter:
     type: http
     behavior: domain
-    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.mrs"
-    path: ./ruleset/twitter.mrs
+    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.yaml"
+    path: ./ruleset/twitter.yaml
     interval: 86400
 
   facebook:
     type: http
     behavior: domain
-    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/facebook.mrs"
-    path: ./ruleset/facebook.mrs
+    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/facebook.yaml"
+    path: ./ruleset/facebook.yaml
     interval: 86400
 
-  ai:
+  openai:
     type: http
     behavior: domain
-    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ai.mrs"
-    path: ./ruleset/ai.mrs
+    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/openai.yaml"
+    path: ./ruleset/openai.yaml
+    interval: 86400
+
+
+
+  claude:
+    type: http
+    behavior: domain
+    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/anthropic.yaml"
+    path: ./ruleset/claude.yaml
+    interval: 86400
+
+  bing:
+    type: http
+    behavior: domain
+    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bing.yaml"
+    path: ./ruleset/bing.yaml
     interval: 86400
 
   youtube:
     type: http
     behavior: domain
-    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"
-    path: ./ruleset/youtube.mrs
+    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.yaml"
+    path: ./ruleset/youtube.yaml
     interval: 86400
 
   netflix:
     type: http
     behavior: domain
-    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs"
-    path: ./ruleset/netflix.mrs
+    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.yaml"
+    path: ./ruleset/netflix.yaml
     interval: 86400
 
   geolocation-!cn:
     type: http
     behavior: domain
-    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"
-    path: ./ruleset/geolocation-!cn.mrs
+    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.yaml"
+    path: ./ruleset/geolocation-!cn.yaml
     interval: 86400
 
   cn:
     type: http
     behavior: domain
-    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
-    path: ./ruleset/cn.mrs
+    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.yaml"
+    path: ./ruleset/cn.yaml
     interval: 86400
 
   telegramcidr:
     type: http
     behavior: ipcidr
-    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs"
-    path: ./ruleset/telegramcidr.mrs
+    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.yaml"
+    path: ./ruleset/telegramcidr.yaml
     interval: 86400
 
   cncidr:
     type: http
     behavior: ipcidr
-    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"
-    path: ./ruleset/cncidr.mrs
+    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.yaml"
+    path: ./ruleset/cncidr.yaml
     interval: 86400
 
   lancidr:
     type: http
     behavior: ipcidr
-    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"
-    path: ./ruleset/lancidr.mrs
+    url: "https://edgeone.gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.yaml"
+    path: ./ruleset/lancidr.yaml
     interval: 86400
 
 # 规则配置
@@ -183,7 +199,11 @@ rules:
   - RULE-SET,facebook,手动选择
   - RULE-SET,youtube,手动选择
   - RULE-SET,netflix,手动选择
-  - RULE-SET,ai,手动选择
+  
+  # AI服务代理
+  - RULE-SET,openai,手动选择
+  - RULE-SET,claude,手动选择
+  - RULE-SET,bing,手动选择
   - RULE-SET,geolocation-!cn,手动选择
   
   # 兜底规则
