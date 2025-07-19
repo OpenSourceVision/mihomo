@@ -1,0 +1,190 @@
+# Mihomo 配置文件
+# 端口配置
+port: 7890
+socks-port: 7891
+redir-port: 7892
+tproxy-port: 7893
+mixed-port: 7890
+
+# 允许局域网连接
+allow-lan: true
+bind-address: '*'
+
+# 模式设置
+mode: rule
+log-level: info
+external-controller: 127.0.0.1:9090
+
+# DNS 配置
+dns:
+  enable: true
+  listen: 0.0.0.0:53
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+  fallback:
+    - https://1.1.1.1/dns-query
+    - https://dns.google/dns-query
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+      - 240.0.0.0/4
+
+# 代理组配置
+proxy-groups:
+  # 手动选择组
+  - name: "手动选择"
+    type: select
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Server.png
+    include-all: true
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+  
+  # 国内直连组
+  - name: "国内直连"
+    type: select
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
+    proxies:
+      - DIRECT
+
+# 规则集配置
+rule-providers:
+  private:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"
+    path: ./ruleset/private.mrs
+    interval: 86400
+
+  apple:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs"
+    path: ./ruleset/apple.mrs
+    interval: 86400
+
+  microsoft:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs"
+    path: ./ruleset/microsoft.mrs
+    interval: 86400
+
+  google:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"
+    path: ./ruleset/google.mrs
+    interval: 86400
+
+  telegram:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs"
+    path: ./ruleset/telegram.mrs
+    interval: 86400
+
+  twitter:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.mrs"
+    path: ./ruleset/twitter.mrs
+    interval: 86400
+
+  facebook:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/facebook.mrs"
+    path: ./ruleset/facebook.mrs
+    interval: 86400
+
+  ai:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ai.mrs"
+    path: ./ruleset/ai.mrs
+    interval: 86400
+
+  youtube:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"
+    path: ./ruleset/youtube.mrs
+    interval: 86400
+
+  netflix:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs"
+    path: ./ruleset/netflix.mrs
+    interval: 86400
+
+  geolocation-!cn:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"
+    path: ./ruleset/geolocation-!cn.mrs
+    interval: 86400
+
+  cn:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
+    path: ./ruleset/cn.mrs
+    interval: 86400
+
+  telegramcidr:
+    type: http
+    behavior: ipcidr
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs"
+    path: ./ruleset/telegramcidr.mrs
+    interval: 86400
+
+  cncidr:
+    type: http
+    behavior: ipcidr
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"
+    path: ./ruleset/cncidr.mrs
+    interval: 86400
+
+  lancidr:
+    type: http
+    behavior: ipcidr
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"
+    path: ./ruleset/lancidr.mrs
+    interval: 86400
+
+# 规则配置
+rules:
+  # 管理面板直连
+  - DOMAIN,clash.razord.top,国内直连
+  - DOMAIN,yacd.haishan.me,国内直连
+  
+  # 私有网络直连
+  - RULE-SET,private,国内直连
+  - RULE-SET,lancidr,国内直连
+  - GEOIP,LAN,国内直连
+  
+  # 国内服务直连
+  - RULE-SET,apple,国内直连
+  - RULE-SET,microsoft,国内直连
+  - RULE-SET,cn,国内直连
+  - RULE-SET,cncidr,国内直连
+  - GEOIP,CN,国内直连
+  
+  # 国外服务代理
+  - RULE-SET,google,手动选择
+  - RULE-SET,telegram,手动选择
+  - RULE-SET,telegramcidr,手动选择
+  - RULE-SET,twitter,手动选择
+  - RULE-SET,facebook,手动选择
+  - RULE-SET,youtube,手动选择
+  - RULE-SET,netflix,手动选择
+  - RULE-SET,ai,手动选择
+  - RULE-SET,geolocation-!cn,手动选择
+  
+  # 兜底规则
+  - MATCH,手动选择
