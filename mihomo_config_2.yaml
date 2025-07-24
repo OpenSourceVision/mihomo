@@ -71,13 +71,6 @@ proxies:
     udp: true
 
 proxy-groups:
-  # 手动选择分组 - 只包含地区分组
-  - name: Select
-    type: select
-    proxies:
-      - US
-      - RU
-    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Static.png
 
   # 美国分组 - 自动测速
   - name: US
@@ -104,25 +97,27 @@ proxy-groups:
   # AI服务分组 - 包含手动选择和美国分组
   - name: AI
     type: select
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/claude.png
     proxies:
       - US
-      - Select
-    icon: https://gh-proxy.com/https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/claude.png
+   
+ 
   # YouTube分组 - 包含美国和俄罗斯分组，默认俄罗斯
   - name: YouTube
     type: select
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
     proxies:
       - RU
       - US
-    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
+
 
   # GitHub分组 - 包含美国和手动选择分组
   - name: GitHub
     type: select
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/GitHub.png
     proxies:
       - US
-      - Select
-    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/GitHub.png
+    
 
 rule-providers:
   # 私有网络
@@ -242,7 +237,7 @@ rules:
   - RULE-SET,github,GitHub
   
   # 非中国地区域名走手动选择
-  - RULE-SET,geolocation-!cn,Select
+  - RULE-SET,geolocation-!cn,US
   
   # 兜底规则 - 其他所有流量直连
-  - MATCH,Select
+  - MATCH,US
