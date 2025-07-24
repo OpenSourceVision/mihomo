@@ -1,9 +1,74 @@
+# 基础配置
 port: 7890 # HTTP(S) 代理服务器端口
 socks-port: 7891 # SOCKS5 代理端口
 redir-port: 7892 # 透明代理端口，用于 Linux 和 MacOS
-mixed-port: 10801 # HTTP(S) 和 SOCKS 代理混合端口
+mixed-port: 7893 # HTTP(S) 和 SOCKS 代理混合端口
 allow-lan: true # 允许局域网连接
 
+ipv6: true
+allow-lan: true
+unified-delay: false
+tcp-concurrent: true
+external-controller: 127.0.0.1:9090
+external-ui: ui
+external-ui-url: "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip"
+
+find-process-mode: strict
+global-client-fingerprint: chrome
+
+# 配置文件
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+# 嗅探配置
+sniffer:
+  enable: true
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  skip-domain:
+    - "Mijia Cloud"
+    - "+.push.apple.com"
+
+# TUN 配置
+tun:
+  enable: true
+  stack: mixed
+  dns-hijack:
+    - "any:53"
+    - "tcp://any:53"
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+
+# DNS 配置
+dns:
+  enable: true
+  ipv6: true
+  enhanced-mode: fake-ip
+  fake-ip-filter:
+    - "*"
+    - "+.lan"
+    - "+.local"
+    - "+.market.xiaomi.com"
+  default-nameserver:
+    - tls://223.5.5.5
+    - tls://223.6.6.6
+  nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+
+# 直连
+proxies:
+  - name: "直连"
+    type: direct
+    udp: true
 
 proxy-groups:
   # 手动选择分组 - 只包含地区分组
