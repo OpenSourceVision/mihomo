@@ -4,12 +4,6 @@ ipv6: true
 allow-lan: true
 unified-delay: false
 tcp-concurrent: true
-external-controller: 127.0.0.1:9090
-external-ui: ui
-external-ui-url: "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip"
-
-find-process-mode: strict
-global-client-fingerprint: chrome
 
 # 直连
 proxies:
@@ -65,9 +59,6 @@ proxy-groups:
       - US
       - FR
       - NL
-    
-  
-
 
 # 规则
 rules:
