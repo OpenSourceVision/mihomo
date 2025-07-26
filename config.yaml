@@ -1,10 +1,5 @@
 # 基础配置
-port: 7890 # HTTP(S) 代理服务器端口
-socks-port: 7891 # SOCKS5 代理端口
-redir-port: 7892 # 透明代理端口，用于 Linux 和 MacOS
-mixed-port: 7893 # HTTP(S) 和 SOCKS 代理混合端口
-allow-lan: true # 允许局域网连接
-
+mixed-port: 7890
 ipv6: true
 allow-lan: true
 unified-delay: false
@@ -16,127 +11,287 @@ external-ui-url: "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-
 find-process-mode: strict
 global-client-fingerprint: chrome
 
-# 配置文件
-profile:
-  store-selected: true
-  store-fake-ip: true
-
-# 嗅探配置
-sniffer:
-  enable: true
-  sniff:
-    HTTP:
-      ports: [80, 8080-8880]
-      override-destination: true
-    TLS:
-      ports: [443, 8443]
-    QUIC:
-      ports: [443, 8443]
-  skip-domain:
-    - "Mijia Cloud"
-    - "+.push.apple.com"
-
-# TUN 配置
-tun:
-  enable: true
-  stack: mixed
-  dns-hijack:
-    - "any:53"
-    - "tcp://any:53"
-  auto-route: true
-  auto-redirect: true
-  auto-detect-interface: true
-
-# DNS 配置
-dns:
-  enable: true
-  ipv6: true
-  enhanced-mode: fake-ip
-  fake-ip-filter:
-    - "*"
-    - "+.lan"
-    - "+.local"
-    - "+.market.xiaomi.com"
-  default-nameserver:
-    - tls://223.5.5.5
-    - tls://223.6.6.6
-  nameserver:
-    - https://doh.pub/dns-query
-    - https://dns.alidns.com/dns-query
-
 # 直连
 proxies:
-  - name: "直连"
+  - name: "direct"
     type: direct
     udp: true
 
 # 代理组
 proxy-groups:
+ 
+  - name: Default
+    type: select
+    icon: https://raw.githubusercontent.com/OpenSourceVision/icon/refs/heads/main/other/Default.png
+    proxies:
+      - US
+      - RU
+      - FR
+      - NL
+
   - name: US
     type: url-test
     include-all: true
     exclude-type: direct
     filter: "(?i)美|us|unitedstates|united states"
-    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
+    icon: https://raw.githubusercontent.com/OpenSourceVision/icon/refs/heads/main/flag/US.png
 
   - name: RU
     type: url-test
     include-all: true
     filter: "(?i)俄罗斯|俄|RU|Russia|Moscow"
-    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Russia.png
+    icon: https://raw.githubusercontent.com/OpenSourceVision/icon/refs/heads/main/flag/RU.png
+  
+  - name: FR
+    type: url-test
+    include-all: true
+    exclude-type: direct
+    filter: "(?i)法|fr|france|paris"
+    icon: https://raw.githubusercontent.com/OpenSourceVision/icon/refs/heads/main/flag/FR.png
 
-  - name: CN
-    type: select
-    proxies: [直连, US]
-    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
+  - name: NL
+    type: url-test
+    include-all: true
+    exclude-type: direct
+    filter: "(?i)荷|nl|netherlands|amsterdam"
+    icon: https://raw.githubusercontent.com/OpenSourceVision/icon/refs/heads/main/flag/NL.png
 
+ 
   - name: YouTube
     type: select
-    proxies: [RU, US]
-    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
+    icon: https://raw.githubusercontent.com/OpenSourceVision/icon/refs/heads/main/media/YouTube.png
+    proxies:
+      - RU
+      - US
+      - FR
+      - NL
+    
+  
 
-  - name: 漏网
-    type: select
-    proxies: [US, 直连]
-    icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Global.png
 
 # 规则
 rules:
-  - RULE-SET,youtube_domain,YouTube
-  - RULE-SET,private_ip,直连,no-resolve
-  - RULE-SET,private_domain,直连
-  - RULE-SET,cn_domain,CN
-  - RULE-SET,geolocation-!cn,漏网
-  - RULE-SET,cn_ip,CN
-  - MATCH,漏网
+  # AI服务
+  - RULE-SET,openai,US
+  - RULE-SET,anthropic,US
+  - RULE-SET,perplexity,US
+  - RULE-SET,copilot,US
+  - RULE-SET,bing,US
 
-# 规则锚点
-rule-anchor:
-  ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
-  domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs}
+  # 流媒体服务
+  - RULE-SET,youtube,YouTube
+  - RULE-SET,netflix,US
+  - RULE-SET,disney,US
+  - RULE-SET,spotify,US
+  - RULE-SET,twitch,US
+
+  # 社交媒体
+  - RULE-SET,twitter,US
+  - RULE-SET,facebook,US
+  - RULE-SET,instagram,US
+  - RULE-SET,telegram,US
+  - RULE-SET,discord,US
+
+  # 开发工具
+  - RULE-SET,github,US
+  - RULE-SET,google,US
+  - RULE-SET,microsoft,US
+
+  # 本地网络
+  - RULE-SET,private_ip,direct,no-resolve
+  - RULE-SET,private_domain,direct
+  - RULE-SET,cn_domain,direct
+  - RULE-SET,cn_ip,direct
+  - RULE-SET,geolocation-!cn,Default
+  - MATCH,Default
 
 # 规则提供者
 rule-providers:
-  youtube_domain:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"
+  # AI服务规则
+  openai:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/openai.mrs
+    path: ./ruleset/openai.mrs
+    behavior: domain
+    interval: 86400
+    format: mrs
+    type: http
 
+  anthropic:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/anthropic.mrs
+    path: ./ruleset/anthropic.mrs
+    behavior: domain
+    interval: 86400
+    format: mrs
+    type: http
+
+  perplexity:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/perplexity.mrs
+    path: ./ruleset/perplexity.mrs
+    behavior: domain
+    interval: 86400
+    format: mrs
+    type: http
+
+  copilot:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs
+    path: ./ruleset/copilot.mrs
+    behavior: domain
+    interval: 86400
+    format: mrs
+    type: http
+
+  bing:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bing.mrs
+    path: ./ruleset/bing.mrs
+    behavior: domain
+    interval: 86400
+    format: mrs
+    type: http
+
+  # 流媒体服务
+  youtube:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs
+    path: ./ruleset/youtube.mrs
+    behavior: domain
+    interval: 86400
+    format: mrs
+    type: http
+
+  netflix:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs
+    path: ./ruleset/netflix.mrs
+    behavior: domain
+    interval: 86400
+    format: mrs
+    type: http
+
+  disney:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/disney.mrs
+    path: ./ruleset/disney.mrs
+    behavior: domain
+    interval: 86400
+    format: mrs
+    type: http
+
+  spotify:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/spotify.mrs
+    path: ./ruleset/spotify.mrs
+    behavior: domain
+    interval: 86400
+    format: mrs
+    type: http
+
+  twitch:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitch.mrs
+    path: ./ruleset/twitch.mrs
+    behavior: domain
+    interval: 86400
+    format: mrs
+    type: http
+
+  # 社交媒体
+  twitter:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.mrs
+    path: ./ruleset/twitter.mrs
+    behavior: domain
+    interval: 86400
+    format: mrs
+    type: http
+
+  facebook:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/facebook.mrs
+    path: ./ruleset/facebook.mrs
+    behavior: domain
+    interval: 86400
+    format: mrs
+    type: http
+
+  instagram:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/instagram.mrs
+    path: ./ruleset/instagram.mrs
+    behavior: domain
+    interval: 86400
+    format: mrs
+    type: http
+
+  telegram:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs
+    path: ./ruleset/telegram.mrs
+    behavior: domain
+    interval: 86400
+    format: mrs
+    type: http
+
+  discord:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/discord.mrs
+    path: ./ruleset/discord.mrs
+    behavior: domain
+    interval: 86400
+    format: mrs
+    type: http
+
+  # 开发工具
+  github:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs
+    path: ./ruleset/github.mrs
+    behavior: domain
+    interval: 86400
+    format: mrs
+    type: http
+
+  google:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs
+    path: ./ruleset/google.mrs
+    behavior: domain
+    interval: 86400
+    format: mrs
+    type: http
+
+  microsoft:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs
+    path: ./ruleset/microsoft.mrs
+    behavior: domain
+    interval: 86400
+    format: mrs
+    type: http
+
+  # 基础网络规则
   private_domain:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs
+    path: ./ruleset/private_domain.mrs
+    behavior: domain
+    interval: 86400
+    format: mrs
+    type: http
 
   cn_domain:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs
+    path: ./ruleset/cn_domain.mrs
+    behavior: domain
+    interval: 86400
+    format: mrs
+    type: http
 
   geolocation-!cn:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs
+    path: ./ruleset/geolocation-!cn.mrs
+    behavior: domain
+    interval: 86400
+    format: mrs
+    type: http
 
   private_ip:
-    <<: *ip
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs
+    path: ./ruleset/private_ip.mrs
+    behavior: ipcidr
+    interval: 86400
+    format: mrs
+    type: http
 
   cn_ip:
-    <<: *ip
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs
+    path: ./ruleset/cn_ip.mrs
+    behavior: ipcidr
+    interval: 86400
+    format: mrs
+    type: http
