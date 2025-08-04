@@ -1,0 +1,62 @@
+proxy-groups:
+  # 美国分组 - 自动测速
+  - name: US
+    type: url-test
+    include-all: true
+    filter: (?i)美国|美|US|USA|United States|America|San Francisco|Los Angeles|New York|Chicago|Miami|Dallas|Seattle|Phoenix|Denver|Atlanta
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
+
+rule-providers:
+  # 私有网络
+  private:
+    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/private.yaml
+    path: ./ruleset/private.yaml
+    behavior: domain
+    interval: 86400
+    format: yaml
+    type: http
+
+  # 国内域名
+  cn_domain:
+    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/cn.yaml
+    path: ./ruleset/cn_domain.yaml
+    behavior: domain
+    interval: 86400
+    format: yaml
+    type: http
+
+  # 国内IP
+  cn_ip:
+    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/cn.yaml
+    path: ./ruleset/cn_ip.yaml
+    behavior: ipcidr
+    interval: 86400
+    format: yaml
+    type: http
+
+  # 非中国地区域名
+  geolocation-!cn:
+    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/geolocation-!cn.yaml
+    path: ./ruleset/geolocation-!cn.yaml
+    behavior: domain
+    interval: 86400
+    format: yaml
+    type: http
+
+rules:
+  # 私有网络直连
+  - "RULE-SET,private,DIRECT"
+  
+  # 国内域名和IP直连
+  - "RULE-SET,cn_domain,DIRECT"
+  - "RULE-SET,cn_ip,DIRECT"
+  
+  # 非中国地区域名走美国节点
+  - "RULE-SET,geolocation-!cn,US"
+  
+  # 兜底规则 - 其他所有流量走美国节点
+  - "MATCH,US"
