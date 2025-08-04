@@ -51,12 +51,12 @@ rules:
   # 私有网络直连
   - "RULE-SET,private,DIRECT"
   
-  # 国内域名和IP直连
-  - "RULE-SET,cn_domain,DIRECT"
-  - "RULE-SET,cn_ip,DIRECT"
-  
   # 非中国地区域名走美国节点
   - "RULE-SET,geolocation-!cn,US"
   
   # 兜底规则 - 其他所有流量走美国节点
   - "MATCH,US"
+
+  # 国内域名和IP直连
+  - "RULE-SET,cn_domain,DIRECT"
+  - "RULE-SET,cn_ip,DIRECT"
