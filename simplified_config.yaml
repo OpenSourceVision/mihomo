@@ -1,62 +1,41 @@
+# Mihomo 简化配置文件 - 仅包含选择分组
+port: 7890
+socks-port: 7891
+allow-lan: false
+mode: rule
+log-level: info
+external-controller: 127.0.0.1:9090
+external-ui: ui
+
+# DNS 配置
+dns:
+  enable: true
+  listen: 0.0.0.0:53
+  default-nameserver:
+    - 223.5.5.5
+    - 8.8.8.8
+  nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+
+
+# 代理组配置 - 只有一个选择分组
 proxy-groups:
-  # 美国分组 - 自动测速
-  - name: US
-    type: url-test
+  - name: "选择"
+    type: select
     include-all: true
-    filter: (?i)美国|美|US|USA|United States|America|San Francisco|Los Angeles|New York|Chicago|Miami|Dallas|Seattle|Phoenix|Denver|Atlanta
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    icon: https://gh-proxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
+    exclude-type: direct
 
-rule-providers:
-  # 私有网络
-  private:
-    url: https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.yaml
-    path: ./ruleset/private.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-
-  # 国内域名
-  cn_domain:
-    url: https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.yaml
-    path: ./ruleset/cn_domain.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-
-  # 国内IP
-  cn_ip:
-    url: https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.yaml
-    path: ./ruleset/cn_ip.yaml
-    behavior: ipcidr
-    interval: 86400
-    format: yaml
-    type: http
-
-  # 非中国地区域名
-  geolocation-!cn:
-    url: https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.yaml
-    path: ./ruleset/geolocation-!cn.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-
+# 规则配置 - 极简规则，所有流量走选择分组
 rules:
-  # 私有网络直连
-  - "RULE-SET,private,DIRECT"
+  # 本地网络直连
+  - DOMAIN-SUFFIX,local,DIRECT
+  - IP-CIDR,127.0.0.0/8,DIRECT
+  - IP-CIDR,172.16.0.0/12,DIRECT
+  - IP-CIDR,192.168.0.0/16,DIRECT
+  - IP-CIDR,10.0.0.0/8,DIRECT
+  - IP-CIDR,17.0.0.0/8,DIRECT
+  - IP-CIDR,100.64.0.0/10,DIRECT
   
-  # 国内域名和IP直连
-  - "RULE-SET,cn_domain,DIRECT"
-  - "RULE-SET,cn_ip,DIRECT"
-  
-  # 非中国地区域名走美国节点
-  - "RULE-SET,geolocation-!cn,US"
-  
-  # 兜底规则 - 其他所有流量走美国节点
-  - "MATCH,US"
+  # 所有其他流量走选择分组
+  - MATCH,选择
