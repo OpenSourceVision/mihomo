@@ -12,11 +12,11 @@ dns:
   enable: true
   listen: 0.0.0.0:53
   default-nameserver:
+    - 223.5.5.5
     - 94.140.14.14
-    - 8.8.8.8
   nameserver:
+    - https://dns.alidns.com/dns-query
     - https://dns.adguard-dns.com/dns-query
-    - https://dns.google/dns-query
 
 
 # 代理组配置
@@ -30,14 +30,6 @@ proxy-groups:
       - "手动"
       
 
-  # 手动选择分组 - 手动选择节点
-  - name: "手动"
-    type: select
-    include-all: true
-    exclude-type: direct
-    icon: https://raw.githubusercontent.com/Koolson/Qure/refs/heads/master/IconSet/Color/Available.png
-    
-
   # 自动选择分组 - 基于延迟自动选择最优节点
   - name: "自动"
     type: url-test
@@ -47,6 +39,16 @@ proxy-groups:
     interval: 300
     tolerance: 50
     icon: https://raw.githubusercontent.com/Koolson/Qure/refs/heads/master/IconSet/Color/Speedtest.png
+
+  # 手动选择分组 - 手动选择节点
+  - name: "手动"
+    type: select
+    include-all: true
+    exclude-type: direct
+    icon: https://raw.githubusercontent.com/Koolson/Qure/refs/heads/master/IconSet/Color/Available.png
+    
+
+
 
 # 规则配置 - 极简规则，所有流量走选择分组
 rules:
