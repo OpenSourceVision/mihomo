@@ -1,4 +1,4 @@
-# Mihomo 简化配置文件 - 仅包含选择分组
+# Mihomo 简化配置文件 - 包含选择、手动和自动分组
 port: 7890
 socks-port: 7891
 allow-lan: false
@@ -19,12 +19,30 @@ dns:
     - https://dns.alidns.com/dns-query
 
 
-# 代理组配置 - 只有一个选择分组
+# 代理组配置
 proxy-groups:
+  # 主选择分组 - 包含手动分组和自动分组
   - name: "选择"
+    type: select
+    proxies:
+      - "自动"
+      - "手动"
+      
+
+  # 手动选择分组 - 手动选择节点
+  - name: "手动"
     type: select
     include-all: true
     exclude-type: direct
+
+  # 自动选择分组 - 基于延迟自动选择最优节点
+  - name: "自动"
+    type: url-test
+    include-all: true
+    exclude-type: direct
+    url: 'http://www.gstatic.com/generate_204'
+    interval: 300
+    tolerance: 50
 
 # 规则配置 - 极简规则，所有流量走选择分组
 rules:
