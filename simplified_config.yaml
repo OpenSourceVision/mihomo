@@ -21,16 +21,6 @@ dns:
 
 # 代理组配置
 proxy-groups:
-  # 主选择分组 - 包含手动分组和自动分组
-  - name: "选择"
-    type: select
-    icon: https://raw.githubusercontent.com/Koolson/Qure/refs/heads/master/IconSet/Color/Final.png
-    proxies:
-      - "自动"
-      - "手动"
-      
-
-  # 自动选择分组 - 基于延迟自动选择最优节点
   - name: "自动"
     type: url-test
     include-all: true
@@ -40,17 +30,9 @@ proxy-groups:
     tolerance: 50
     icon: https://raw.githubusercontent.com/Koolson/Qure/refs/heads/master/IconSet/Color/Speedtest.png
 
-  # 手动选择分组 - 手动选择节点
-  - name: "手动"
-    type: select
-    include-all: true
-    exclude-type: direct
-    icon: https://raw.githubusercontent.com/Koolson/Qure/refs/heads/master/IconSet/Color/Available.png
-    
 
 
-
-# 规则配置 - 极简规则，所有流量走选择分组
+# 规则配置 - 极简规则，所有流量走自动分组
 rules:
   # 本地网络直连
   - DOMAIN-SUFFIX,local,DIRECT
@@ -62,4 +44,4 @@ rules:
   - IP-CIDR,100.64.0.0/10,DIRECT
   
   # 所有其他流量走选择分组
-  - MATCH,选择
+  - MATCH,自动
