@@ -22,7 +22,7 @@ dns:
 # 代理组配置
 proxy-groups:
   - name: "自动"
-    type: url-test
+    type: select
     include-all: true
     exclude-type: direct
     url: 'http://www.gstatic.com/generate_204'
