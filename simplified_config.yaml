@@ -21,7 +21,7 @@ dns:
 
 # 代理组配置
 proxy-groups:
-  - name: "自动"
+  - name: 选择
     type: select
     include-all: true
     exclude-type: direct
@@ -44,4 +44,4 @@ rules:
   - IP-CIDR,100.64.0.0/10,DIRECT
   
   # 所有其他流量走选择分组
-  - MATCH,自动
+  - MATCH,选择
