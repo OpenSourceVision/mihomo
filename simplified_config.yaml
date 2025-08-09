@@ -27,22 +27,52 @@ proxy-groups:
 
 # 规则集提供者
 rule-providers:
-  LAN:
-    type: http
-    behavior: classical
-    path: ./ruleset/lan.yaml
-    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.yaml
+ # 基础规则
+  reject:
+    url: https://github.com/Potterli20/file/releases/download/ad-youtube-hosts/ad-youtube-clash-premium.yaml
+    path: ./ruleset/reject.yaml
+    behavior: domain
     interval: 86400
+    format: yaml
+    type: http
 
-  CN:
-    type: http
-    behavior: classical
-    path: ./ruleset/cn.yaml
-    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.yaml
+  reject-plus:
+    url: https://github.com/Potterli20/file/releases/download/ad-hosts-pro/ad-clash-premium.yaml
+    path: ./ruleset/reject-plus.yaml
+    behavior: domain
     interval: 86400
+    format: yaml
+    type: http
+
+  private:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.yaml
+    path: ./ruleset/private.yaml
+    behavior: domain
+    interval: 86400
+    format: yaml
+    type: http
+  
+  cn_ip:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.yaml
+    path: ./ruleset/cn_ip.yaml
+    behavior: ipcidr
+    interval: 86400
+    format: yaml
+    type: http
+  
+  cn_domain:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.yaml
+    path: ./ruleset/cn_domain.yaml
+    behavior: domain
+    interval: 86400
+    format: yaml
+    type: http  
 
 # 规则引用
 rules:
-  - RULE-SET,LAN,DIRECT   # 局域网直连
-  - RULE-SET,CN,DIRECT    # 国内直连
-  - MATCH,手动            # 其他全部走手动代理
+  - RULE-SET,reject,REJECT
+  - RULE-SET,reject-plus,REJECT
+  - RULE-SET,private,DIRECT
+  - RULE-SET,cn_domain,DIRECT
+  - RULE-SET,cn_ip,DIRECT
+  - MATCH,手动
