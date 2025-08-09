@@ -33,16 +33,8 @@ proxy-groups:
 rule-providers:
   # 广告拦截规则
   reject:
-    url: https://github.com/Potterli20/file/releases/download/ad-youtube-hosts/ad-youtube-clash-premium.yaml
+    url: https://raw.githubusercontent.com/OpenSourceVision/YouTube-AD/refs/heads/main/youtube-ad.yaml
     path: ./ruleset/reject.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-
-  reject-plus:
-    url: https://github.com/Potterli20/file/releases/download/ad-hosts-pro/ad-clash-premium.yaml
-    path: ./ruleset/reject-plus.yaml
     behavior: domain
     interval: 86400
     format: yaml
@@ -75,8 +67,8 @@ rule-providers:
 # 规则引用（按优先级排序）
 rules:
   - RULE-SET,reject,REJECT
-  - RULE-SET,reject-plus,REJECT
   - RULE-SET,private,DIRECT
   - RULE-SET,cn_domain,DIRECT
   - RULE-SET,cn_ip,DIRECT
+
   - MATCH,自动
