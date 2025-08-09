@@ -27,16 +27,6 @@ proxy-groups:
 
 # 规则集提供者
 rule-providers:
- # 基础规则
-  reject:
-    url: https://raw.githubusercontent.com/OpenSourceVision/YouTube-AD/refs/heads/main/youtube-ad.yaml
-    path: ./ruleset/reject.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-
-
   private:
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.yaml
     path: ./ruleset/private.yaml
@@ -63,7 +53,6 @@ rule-providers:
 
 # 规则引用
 rules:
-  - RULE-SET,reject,REJECT
   - RULE-SET,private,DIRECT
   - RULE-SET,cn_domain,DIRECT
   - RULE-SET,cn_ip,DIRECT
