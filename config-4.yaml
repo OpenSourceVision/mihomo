@@ -1,0 +1,127 @@
+port: 7890
+socks-port: 7891
+allow-lan: false
+mode: rule
+log-level: info
+external-controller: 127.0.0.1:9090
+external-ui: ui
+
+# DNS 配置
+dns:
+  enable: true
+  listen: 0.0.0.0:53
+  default-nameserver:
+    - 223.5.5.5
+    - 94.140.14.14
+  nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://dns.adguard-dns.com/dns-query
+
+# 地区自动测速分组
+proxy-groups:
+  - name: 手动
+    type: select
+    proxies:
+      - US
+      - HK
+      - SG
+      - JP
+      - UN
+    icon: https://raw.githubusercontent.com/OpenSourceVision/icon/refs/heads/main/other/Default.png
+
+  - name: US
+    type: url-test
+    include-all: true
+    filter: '.*(美国|美國|US|United States|America|USA|美|🇺🇸|纽约|洛杉矶|旧金山|西雅图|芝加哥|达拉斯|Miami|Atlanta|Denver|Phoenix).*'
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    icon: https://raw.githubusercontent.com/OpenSourceVision/icon/refs/heads/main/flag/US.png
+
+  - name: HK
+    type: url-test
+    include-all: true
+    filter: '.*(香港|港|HK|Hong Kong|HongKong|🇭🇰|深港|中港).*'
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    icon: https://raw.githubusercontent.com/OpenSourceVision/icon/refs/heads/main/flag/HK.png
+
+  - name: SG
+    type: url-test
+    include-all: true
+    filter: '.*(新加坡|坡|狮城|SG|Singapore|🇸🇬).*'
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    icon: https://raw.githubusercontent.com/OpenSourceVision/icon/refs/heads/main/flag/SG.png
+
+  - name: JP
+    type: url-test
+    include-all: true
+    filter: '.*(日本|日|JP|Japan|🇯🇵|东京|大阪|Tokyo|Osaka|Nagoya|名古屋).*'
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    icon: https://raw.githubusercontent.com/OpenSourceVision/icon/refs/heads/main/flag/JP.png
+
+  - name: UN
+    type: url-test
+    include-all: true
+    filter: '.*'
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    icon: https://raw.githubusercontent.com/OpenSourceVision/icon/refs/heads/main/flag/UN.png
+
+# 规则集提供者
+rule-providers:
+  # 广告规则
+  ad:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/earoftoast/clash-rules/main/AD.yaml"
+    path: ./rules/ad.yaml
+    interval: 86400
+    format: yaml
+  privacy:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/earoftoast/clash-rules/main/EasyPrivacy.yaml"
+    path: ./rules/privacy.yaml
+    interval: 86400
+    format: yaml
+
+  # 基础规则
+  private:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.yaml
+    path: ./ruleset/private.yaml
+    behavior: domain
+    interval: 86400
+    format: yaml
+    type: http
+  
+  cn_ip:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.yaml
+    path: ./ruleset/cn_ip.yaml
+    behavior: ipcidr
+    interval: 86400
+    format: yaml
+    type: http
+  
+  cn_domain:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.yaml
+    path: ./ruleset/cn_domain.yaml
+    behavior: domain
+    interval: 86400
+    format: yaml
+    type: http  
+
+# 规则引用
+rules:
+  - RULE-SET,ad,REJECT
+  - RULE-SET,privacy,REJECT
+  - RULE-SET,private,DIRECT
+  - RULE-SET,cn_domain,DIRECT
+  - RULE-SET,cn_ip,DIRECT
+  - MATCH,手动
