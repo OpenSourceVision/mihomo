@@ -1,4 +1,3 @@
-# Mihomo 简化配置文件 - 包含选择、手动和自动分组
 port: 7890
 socks-port: 7891
 allow-lan: false
@@ -18,30 +17,32 @@ dns:
     - https://dns.alidns.com/dns-query
     - https://dns.adguard-dns.com/dns-query
 
-
-# 代理组配置
+# 代理组（仅手动）
 proxy-groups:
-  - name: 选择
+  - name: 手动
     type: select
     include-all: true
     exclude-type: direct
-    url: 'http://www.gstatic.com/generate_204'
-    interval: 300
-    tolerance: 50
     icon: https://raw.githubusercontent.com/Koolson/Qure/refs/heads/master/IconSet/Color/Speedtest.png
 
+# 规则集提供者
+rule-providers:
+  LAN:
+    type: http
+    behavior: classical
+    path: ./ruleset/lan.yaml
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.yaml
+    interval: 86400
 
+  CN:
+    type: http
+    behavior: classical
+    path: ./ruleset/cn.yaml
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.yaml
+    interval: 86400
 
-# 规则配置 - 极简规则，所有流量走自动分组
+# 规则引用
 rules:
-  # 本地网络直连
-  - DOMAIN-SUFFIX,local,DIRECT
-  - IP-CIDR,127.0.0.0/8,DIRECT
-  - IP-CIDR,172.16.0.0/12,DIRECT
-  - IP-CIDR,192.168.0.0/16,DIRECT
-  - IP-CIDR,10.0.0.0/8,DIRECT
-  - IP-CIDR,17.0.0.0/8,DIRECT
-  - IP-CIDR,100.64.0.0/10,DIRECT
-  
-  # 所有其他流量走选择分组
-  - MATCH,选择
+  - RULE-SET,LAN,DIRECT   # 局域网直连
+  - RULE-SET,CN,DIRECT    # 国内直连
+  - MATCH,手动            # 其他全部走手动代理
