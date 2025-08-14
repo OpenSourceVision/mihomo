@@ -78,20 +78,13 @@ proxy-groups:
 rule-providers:
   # 广告规则
   adblock:
-    type: http
-    behavior: domain
-    url: "https://raw.githubusercontent.com/REIJI007/AdBlock_Rule_For_Clash/main/adblock_reject.yaml"
+    url: "https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockmihomo.yaml"
     path: ./rules/adblock.yaml
-    interval: 86400
-    format: yaml
-  EasyPrivacy:
-    type: http
     behavior: domain
-    url: "https://raw.githubusercontent.com/earoftoast/clash-rules/main/EasyPrivacy.yaml"
-    path: ./rules/EasyPrivacy.yaml
     interval: 86400
     format: yaml
-
+    type: http
+  
   # 基础规则
   private:
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.yaml
@@ -120,8 +113,8 @@ rule-providers:
 # 规则引用
 rules:
   - RULE-SET,adblock,REJECT
-  - RULE-SET,EasyPrivacy,REJECT
   - RULE-SET,private,DIRECT
   - RULE-SET,cn_domain,DIRECT
   - RULE-SET,cn_ip,DIRECT
+
   - MATCH,手动
