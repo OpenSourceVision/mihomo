@@ -31,6 +31,14 @@ proxy-groups:
 
 # 规则集提供者
 rule-providers:
+  adblock:
+    url: "https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockmihomo.yaml"
+    path: ./rules/adblock.yaml
+    behavior: domain
+    interval: 86400
+    format: yaml
+    type: http
+    
   private:
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.yaml
     path: ./ruleset/private.yaml
@@ -57,9 +65,11 @@ rule-providers:
 
 # 规则引用（按优先级排序）
 rules:
+  - RULE-SET,adblock,REJECT
   - RULE-SET,private,DIRECT
   - RULE-SET,cn_domain,DIRECT
   - RULE-SET,cn_ip,DIRECT
 
   - MATCH,自动
+
 
