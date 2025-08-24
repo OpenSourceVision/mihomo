@@ -20,7 +20,7 @@ dns:
 
 # 代理组（自动选择）
 proxy-groups:
-  - name: 自动
+  - name: AUTO
     type: url-test
     include-all: true
     exclude-type: direct
@@ -62,14 +62,34 @@ rule-providers:
     interval: 86400
     format: yaml
     type: http  
+  
+  youtube:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.yaml
+    path: ./ruleset/youtube.yaml
+    behavior: domain
+    interval: 86400
+    format: yaml
+    type: http
+ 
+  telegram:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.yaml
+    path: ./ruleset/telegram.yaml
+    behavior: domain
+    interval: 86400
+    format: yaml
+    type: http
+
+
 
 # 规则引用（按优先级排序）
 rules:
   - RULE-SET,adblock,REJECT
+  - RULE-SET,youtube,AUTO
+  - RULE-SET,telegram,AUTO
   - RULE-SET,private,DIRECT
   - RULE-SET,cn_domain,DIRECT
   - RULE-SET,cn_ip,DIRECT
 
-  - MATCH,自动
+  - MATCH,AUTO
 
 
