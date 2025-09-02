@@ -19,7 +19,7 @@ dns:
 
 # 代理组（仅手动）
 proxy-groups:
-  - name: 手动
+  - name: 选择
     type: select
     include-all: true
     exclude-type: direct
@@ -70,8 +70,8 @@ rule-providers:
 # 规则引用
 rules:
   - RULE-SET,private,DIRECT
-  - RULE-SET,youtube,AUTO
-  - RULE-SET,telegram,AUTO
+  - RULE-SET,youtube,选择
+  - RULE-SET,telegram,选择
   - RULE-SET,cn_domain,DIRECT
   - RULE-SET,cn_ip,DIRECT
-  - MATCH,手动
+  - MATCH,选择
